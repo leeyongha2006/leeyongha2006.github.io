@@ -1,0 +1,932 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>이용하 · Salesforce Developer</title>
+<meta name="description" content="Salesforce 개발자 이용하의 포트폴리오 — Apex · LWC · AI 연동">
+<meta property="og:title" content="이용하 · Salesforce Developer">
+<meta property="og:description" content="Salesforce 개발자 이용하 — Apex · LWC · 2GP 패키지 · AI 연동">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root {
+    --bg: #f7f9fc;
+    --surface: #ffffff;
+    --surface-2: #eef3f9;
+    --text: #0b1b33;
+    --muted: #5a6b82;
+    --line: #dde5ef;
+    --brand: #0176d3;
+    --brand-2: #00a1e0;
+    --accent: #7c5cff;
+    --del-bg: #ffe4e4;
+    --del-fg: #b42318;
+    --ins-bg: #dcfce7;
+    --ins-fg: #15803d;
+    --shadow: 0 10px 30px rgba(11, 27, 51, .08);
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #070d18;
+        --surface: #0e1726;
+        --surface-2: #142135;
+        --text: #e8eef7;
+        --muted: #93a4bd;
+        --line: #1f2e45;
+        --brand: #3ba3ff;
+        --brand-2: #4cc9f0;
+        --accent: #a594ff;
+        --del-bg: #3b1219;
+        --del-fg: #ff9a9a;
+        --ins-bg: #0f2f1f;
+        --ins-fg: #7ee2a8;
+        --shadow: 0 10px 30px rgba(0, 0, 0, .35);
+    }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Pretendard", system-ui, -apple-system, sans-serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+}
+a { color: var(--brand); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+/* nav */
+nav {
+    position: sticky; top: 0; z-index: 10;
+    backdrop-filter: blur(12px);
+    background: color-mix(in srgb, var(--bg) 80%, transparent);
+    border-bottom: 1px solid var(--line);
+}
+nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+nav .logo { font-weight: 800; letter-spacing: -.02em; color: var(--text); }
+nav .logo span { color: var(--brand); }
+nav ul { display: flex; gap: 22px; list-style: none; margin: 0; padding: 0; }
+nav ul a { color: var(--muted); font-size: 14px; font-weight: 600; }
+nav ul a:hover { color: var(--text); text-decoration: none; }
+@media (max-width: 640px) { nav ul { display: none; } }
+
+/* hero */
+.hero { position: relative; overflow: hidden; padding: 110px 0 90px; }
+.hero::before {
+    content: ""; position: absolute; inset: -40% -10% auto auto;
+    width: 720px; height: 720px; border-radius: 50%;
+    background: radial-gradient(circle, color-mix(in srgb, var(--brand-2) 35%, transparent), transparent 65%);
+    filter: blur(20px); pointer-events: none;
+}
+.hero::after {
+    content: ""; position: absolute; inset: auto auto -50% -15%;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, color-mix(in srgb, var(--accent) 25%, transparent), transparent 65%);
+    filter: blur(20px); pointer-events: none;
+}
+.hero .wrap { position: relative; z-index: 1; }
+.eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 14px; border-radius: 999px;
+    background: var(--surface); border: 1px solid var(--line);
+    font-size: 13px; font-weight: 600; color: var(--muted);
+}
+.eyebrow .dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 4px rgba(34, 197, 94, .2); }
+h1 {
+    font-size: clamp(36px, 6vw, 64px); line-height: 1.15; letter-spacing: -.035em;
+    margin: 22px 0 18px; font-weight: 800;
+}
+.grad {
+    background: linear-gradient(90deg, var(--brand), var(--brand-2) 50%, var(--accent));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.lead { font-size: clamp(17px, 2.2vw, 20px); color: var(--muted); max-width: 640px; margin: 0 0 32px; }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 22px; border-radius: 12px; font-weight: 700; font-size: 15px;
+    border: 1px solid var(--line); background: var(--surface); color: var(--text);
+    transition: transform .15s ease, box-shadow .15s ease;
+}
+.btn:hover { text-decoration: none; transform: translateY(-2px); box-shadow: var(--shadow); }
+.btn.primary { background: var(--brand); border-color: var(--brand); color: #fff; }
+
+/* stats */
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 64px; }
+.stat {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
+    padding: 20px; box-shadow: var(--shadow);
+}
+.stat b { display: block; font-size: 30px; letter-spacing: -.03em; color: var(--brand); }
+.stat span { font-size: 13px; color: var(--muted); font-weight: 600; }
+.stat b.cap { font-size: 20px; margin-bottom: 6px; }
+@media (max-width: 760px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+
+/* sections */
+section { padding: 90px 0; }
+section.alt { background: var(--surface-2); }
+.kicker { font-size: 13px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--brand); }
+h2 { font-size: clamp(28px, 4vw, 40px); letter-spacing: -.03em; margin: 8px 0 14px; line-height: 1.25; }
+.sub { color: var(--muted); max-width: 680px; margin: 0 0 40px; }
+
+/* about */
+.about-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 28px; align-items: start; }
+@media (max-width: 860px) { .about-grid { grid-template-columns: 1fr; } }
+.code {
+    background: #0b1220; color: #d6e2f5; border-radius: 16px; padding: 22px 24px;
+    font: 14px/1.7 ui-monospace, "JetBrains Mono", Consolas, monospace;
+    box-shadow: var(--shadow); overflow-x: auto; border: 1px solid #1c2a40;
+}
+.code .k { color: #7cc4ff; } .code .s { color: #a8e6a1; } .code .c { color: #6b7d99; } .code .t { color: #f5c26b; }
+.code .bar { display: flex; gap: 6px; margin-bottom: 14px; }
+.code .bar i { width: 11px; height: 11px; border-radius: 50%; background: #ff5f57; }
+.code .bar i:nth-child(2) { background: #febc2e; } .code .bar i:nth-child(3) { background: #28c840; }
+.values { display: grid; gap: 14px; }
+.value { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 20px 22px; }
+.value h3 { margin: 0 0 6px; font-size: 17px; }
+.value p { margin: 0; color: var(--muted); font-size: 15px; }
+
+/* skills */
+.skills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 860px) { .skills { grid-template-columns: 1fr; } }
+.skill { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 22px; }
+.skill h3 { margin: 0 0 14px; font-size: 16px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+    font-size: 13px; font-weight: 600; padding: 6px 12px; border-radius: 999px;
+    background: var(--surface-2); border: 1px solid var(--line); color: var(--text);
+}
+.chip.hot { background: color-mix(in srgb, var(--brand) 14%, transparent); border-color: color-mix(in srgb, var(--brand) 40%, transparent); color: var(--brand); }
+
+/* project */
+.project {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 22px;
+    box-shadow: var(--shadow); overflow: hidden;
+}
+.project-head { padding: 34px 34px 10px; }
+.project-head .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.project-head h3 { font-size: 26px; letter-spacing: -.02em; margin: 6px 0 8px; }
+.project-head p { color: var(--muted); margin: 0; }
+.meta { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-top: 26px; }
+.meta div { background: var(--surface); padding: 16px 20px; }
+.meta small { display: block; color: var(--muted); font-size: 12px; font-weight: 700; }
+.meta strong { font-size: 15px; }
+@media (max-width: 760px) { .meta { grid-template-columns: repeat(2, 1fr); } }
+.project-body { padding: 30px 34px 36px; }
+.ps { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 30px; }
+@media (max-width: 760px) { .ps { grid-template-columns: 1fr; } }
+.ps > div { border-radius: 14px; padding: 18px 20px; border: 1px solid var(--line); }
+.ps h4 { margin: 0 0 8px; font-size: 15px; }
+.ps ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 15px; }
+.ps .problem { background: color-mix(in srgb, var(--del-bg) 55%, transparent); }
+.ps .result { background: color-mix(in srgb, var(--ins-bg) 55%, transparent); }
+
+/* flow */
+.flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 10px 0 34px; }
+@media (max-width: 860px) { .flow { grid-template-columns: 1fr; } }
+.step { position: relative; background: var(--surface-2); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+.step em { font-style: normal; font-size: 12px; font-weight: 800; color: var(--brand); }
+.step b { display: block; margin: 4px 0; font-size: 15px; }
+.step span { font-size: 13px; color: var(--muted); }
+
+/* deep dives */
+.dives { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+@media (max-width: 760px) { .dives { grid-template-columns: 1fr; } }
+details.dive {
+    background: var(--surface-2); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px;
+}
+details.dive summary { cursor: pointer; font-weight: 700; list-style: none; display: flex; justify-content: space-between; gap: 10px; }
+details.dive summary::after { content: "+"; color: var(--brand); font-weight: 800; }
+details.dive[open] summary::after { content: "−"; }
+details.dive p, details.dive ul { color: var(--muted); font-size: 15px; margin: 12px 0 0; }
+details.dive ul { padding-left: 18px; }
+
+/* demo */
+.demo { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 28px; box-shadow: var(--shadow); }
+.demo-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 760px) { .demo-inputs { grid-template-columns: 1fr; } }
+.demo label { font-size: 13px; font-weight: 700; color: var(--muted); }
+.demo textarea {
+    width: 100%; min-height: 150px; margin-top: 6px; resize: vertical;
+    border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px;
+    background: var(--surface-2); color: var(--text); font: 14px/1.6 "Pretendard", sans-serif;
+}
+.demo-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin: 18px 0 14px; }
+.toggle { display: inline-flex; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.toggle button {
+    border: 0; background: transparent; color: var(--muted); padding: 8px 14px;
+    font: 600 13px "Pretendard", sans-serif; cursor: pointer;
+}
+.toggle button.on { background: var(--brand); color: #fff; }
+.summary-line { font-size: 14px; font-weight: 700; }
+.summary-line .ins { color: var(--ins-fg); } .summary-line .del { color: var(--del-fg); }
+.diff { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; font-size: 14px; }
+.diff .row { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); }
+.diff .row:first-child { border-top: 0; }
+.diff .cell { padding: 8px 12px; white-space: pre-wrap; word-break: break-word; min-height: 36px; }
+.diff .cell + .cell { border-left: 1px solid var(--line); }
+.diff .cell.del { background: color-mix(in srgb, var(--del-bg) 60%, transparent); }
+.diff .cell.ins { background: color-mix(in srgb, var(--ins-bg) 60%, transparent); }
+.diff.unified .row { grid-template-columns: 28px 1fr; }
+.diff .sign { padding: 8px 0; text-align: center; color: var(--muted); font-weight: 800; }
+.diff mark.d { background: var(--del-bg); color: var(--del-fg); text-decoration: line-through; border-radius: 4px; padding: 0 2px; outline: 1px solid color-mix(in srgb, var(--del-fg) 40%, transparent); }
+.diff mark.i { background: var(--ins-bg); color: var(--ins-fg); border-radius: 4px; padding: 0 2px; outline: 1px solid color-mix(in srgb, var(--ins-fg) 40%, transparent); }
+.demo-note { font-size: 13px; color: var(--muted); margin-top: 12px; }
+
+/* timeline */
+.timeline { position: relative; padding-left: 26px; }
+.timeline::before { content: ""; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 2px; background: var(--line); }
+.tl { position: relative; margin-bottom: 26px; }
+.tl::before {
+    content: ""; position: absolute; left: -25px; top: 6px; width: 14px; height: 14px; border-radius: 50%;
+    background: var(--surface); border: 3px solid var(--brand);
+}
+.tl small { color: var(--brand); font-weight: 800; font-size: 13px; }
+.tl h3 { margin: 2px 0 4px; font-size: 18px; }
+.tl p { margin: 0; color: var(--muted); font-size: 15px; }
+
+.contacts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 860px) { .contacts { grid-template-columns: 1fr; } }
+.contact {
+    display: flex; align-items: center; gap: 16px;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 18px;
+    padding: 22px; color: var(--text); box-shadow: var(--shadow);
+    transition: transform .15s ease, border-color .15s ease;
+}
+.contact:hover { text-decoration: none; transform: translateY(-3px); border-color: var(--brand); }
+.contact .icon {
+    display: grid; place-items: center; width: 48px; height: 48px; flex: none;
+    border-radius: 14px; font-size: 22px;
+    background: color-mix(in srgb, var(--brand) 12%, transparent);
+}
+.contact small { display: block; font-size: 12px; font-weight: 700; color: var(--muted); }
+.contact strong { font-size: 15px; word-break: break-all; }
+/* projects grid */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+.filters button {
+    border: 1px solid var(--line); background: var(--surface); color: var(--muted);
+    padding: 8px 16px; border-radius: 999px; cursor: pointer; font: 700 13px "Pretendard", sans-serif;
+}
+.filters button.on { background: var(--text); color: var(--bg); border-color: var(--text); }
+.cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+@media (max-width: 860px) { .cards { grid-template-columns: 1fr; } }
+details.card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 20px;
+    padding: 24px 26px; box-shadow: var(--shadow); transition: border-color .2s ease, transform .2s ease;
+}
+details.card:hover { border-color: color-mix(in srgb, var(--brand) 50%, var(--line)); transform: translateY(-2px); }
+details.card.big { grid-column: span 2; }
+@media (max-width: 860px) { details.card.big { grid-column: auto; } }
+details.card summary { list-style: none; cursor: pointer; }
+details.card summary::-webkit-details-marker { display: none; }
+details.card summary::after {
+    content: "구현 내용 펼치기 ▾"; display: inline-block; margin-top: 14px;
+    font-size: 13px; font-weight: 700; color: var(--brand);
+}
+details.card[open] summary::after { content: "접기 ▴"; }
+.card-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.badge {
+    font-size: 12px; font-weight: 800; padding: 4px 10px; border-radius: 8px;
+    background: color-mix(in srgb, var(--brand) 14%, transparent); color: var(--brand);
+}
+.badge.ai { background: color-mix(in srgb, var(--accent) 16%, transparent); color: var(--accent); }
+.badge.qa { background: color-mix(in srgb, var(--ins-fg) 16%, transparent); color: var(--ins-fg); }
+.when { font-size: 13px; color: var(--muted); font-weight: 700; }
+details.card h3 { font-size: 21px; letter-spacing: -.02em; margin: 12px 0 8px; line-height: 1.35; }
+details.card p { color: var(--muted); margin: 0 0 14px; font-size: 15px; }
+details.card ul { margin: 16px 0 0; padding: 16px 0 0 18px; border-top: 1px dashed var(--line); color: var(--muted); font-size: 15px; }
+details.card li { margin-bottom: 8px; }
+details.card li b { color: var(--text); }
+details.card .more { margin: 14px 0 0; }
+.nums { display: flex; flex-wrap: wrap; gap: 18px; margin: 0 0 14px; font-size: 14px; color: var(--muted); }
+.nums b { font-size: 22px; color: var(--text); letter-spacing: -.02em; margin-right: 4px; }
+.mini-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 18px; }
+@media (max-width: 860px) { .mini-cards { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .mini-cards { grid-template-columns: 1fr; } }
+.mini { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px; }
+.mini b { display: block; margin-bottom: 6px; font-size: 15px; }
+.mini span { font-size: 13px; color: var(--muted); }
+.hidden { display: none !important; }
+.sf-mark { width: 26px; height: 19px; fill: var(--brand-2); margin-right: 8px; vertical-align: -3px; }
+.hero-cloud { position: absolute; right: 20px; top: 40px; width: 340px; height: 300px; pointer-events: none; }
+.cloud-big { position: absolute; left: 40px; top: 50px; width: 260px; fill: var(--brand-2); filter: drop-shadow(0 20px 40px color-mix(in srgb, var(--brand-2) 45%, transparent)); animation: float 6s ease-in-out infinite; }
+.orb {
+    position: absolute; padding: 6px 14px; border-radius: 999px; font-size: 13px; font-weight: 700;
+    background: var(--surface); border: 1px solid var(--line); color: var(--text); box-shadow: var(--shadow);
+    animation: float 6s ease-in-out infinite;
+}
+.orb.o1 { left: 0; top: 30px; animation-delay: -1.5s; }
+.orb.o2 { right: 0; top: 120px; animation-delay: -3s; }
+.orb.o3 { left: 60px; bottom: 10px; animation-delay: -4.5s; }
+@keyframes float { 50% { transform: translateY(-12px); } }
+@media (max-width: 960px) { .hero-cloud { display: none; } }
+.contact .icon svg { width: 22px; height: 22px; fill: none; stroke: var(--brand); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+footer { padding: 50px 0 60px; text-align: center; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); }
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.show { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+
+<nav>
+    <div class="wrap">
+        <a class="logo" href="#top"><svg class="sf-mark" viewBox="0 0 51 37" aria-hidden="true"><path d="M20.8 4.3c1.6-1.7 3.9-2.7 6.4-2.7 3.3 0 6.2 1.8 7.7 4.6 1.3-.6 2.8-.9 4.3-.9 6 0 10.8 4.8 10.8 10.8s-4.8 10.8-10.8 10.8c-.7 0-1.5-.1-2.2-.2-1.4 2.4-3.9 4-6.9 4-1.2 0-2.4-.3-3.4-.8-1.3 3.1-4.4 5.2-7.9 5.2-3.7 0-6.9-2.4-8.1-5.7-.5.1-1.1.2-1.7.2C2.7 29.6 0 25.7 0 21.9c0-2.6 1.4-4.9 3.4-6.2-.4-1-.7-2.1-.7-3.3C2.7 8 6.4 4.4 10.9 4.4c2.6 0 5 1.2 6.6 3.2"/></svg>Yong Ha <span>Lee</span></a>
+        <ul>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Salesforce</a></li>
+            <li><a href="#side">Side</a></li>
+            <li><a href="#demo">Live Demo</a></li>
+            <li><a href="#journey">Journey</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<header class="hero" id="top">
+    <div class="wrap">
+        <div class="hero-cloud" aria-hidden="true">
+            <svg class="cloud-big" viewBox="0 0 51 37"><path d="M20.8 4.3c1.6-1.7 3.9-2.7 6.4-2.7 3.3 0 6.2 1.8 7.7 4.6 1.3-.6 2.8-.9 4.3-.9 6 0 10.8 4.8 10.8 10.8s-4.8 10.8-10.8 10.8c-.7 0-1.5-.1-2.2-.2-1.4 2.4-3.9 4-6.9 4-1.2 0-2.4-.3-3.4-.8-1.3 3.1-4.4 5.2-7.9 5.2-3.7 0-6.9-2.4-8.1-5.7-.5.1-1.1.2-1.7.2C2.7 29.6 0 25.7 0 21.9c0-2.6 1.4-4.9 3.4-6.2-.4-1-.7-2.1-.7-3.3C2.7 8 6.4 4.4 10.9 4.4c2.6 0 5 1.2 6.6 3.2"/></svg>
+            <span class="orb o1">Apex</span><span class="orb o2">LWC</span><span class="orb o3">2GP</span>
+        </div>
+        <span class="eyebrow"><span class="dot"></span>Salesforce Developer · Apex · LWC · AI</span>
+        <h1><span class="grad">Salesforce</span> 개발자,<br>이용하입니다.</h1>
+        <p class="lead">Salesforce 위에서 <b>2GP 패키지 설계</b>, <b>AI 에이전트 · MCP 서버</b>, <b>업무 화면(LWC)</b>까지 — 하나의 솔루션을 제품으로 만들어 고객에게 설치되는 데까지 책임집니다.</p>
+        <div class="cta">
+            <a class="btn primary" href="#projects">프로젝트 보기 →</a>
+            <a class="btn" href="#demo">문서 비교 데모 해보기</a>
+            <a class="btn" href="#contact">연락하기</a>
+        </div>
+
+        <div class="stats">
+            <div class="stat"><b class="cap">패키지 설계</b><span>Managed / Unlocked 2GP로 솔루션을 모듈 단위 제품화</span></div>
+            <div class="stat"><b class="cap">AI 연동</b><span>Azure OpenAI, MCP 서버로 업무 시스템에 LLM 연결</span></div>
+            <div class="stat"><b class="cap">업무 화면</b><span>LWC와 Apex로 요구사항부터 권한, 다국어까지</span></div>
+            <div class="stat"><b class="cap">품질</b><span>PRD 작성, 테스트 커버리지, Playwright E2E 자동화</span></div>
+        </div>
+    </div>
+</header>
+
+<section id="skills">
+    <div class="wrap">
+        <div class="kicker reveal">Skills</div>
+        <h2 class="reveal">기술 스택</h2>
+        <p class="sub reveal">강조 표시는 실무 프로젝트에서 주력으로 쓰는 기술입니다.</p>
+        <div class="skills">
+            <div class="skill reveal">
+                <h3>Salesforce</h3>
+                <div class="chips">
+                    <span class="chip hot">Apex</span><span class="chip hot">Lightning Web Components</span><span class="chip hot">2GP Managed · Unlocked Package</span><span class="chip hot">SOQL</span>
+                    <span class="chip">Experience Cloud</span><span class="chip">Tooling API</span><span class="chip">Platform Event</span><span class="chip">Batch · Schedulable</span>
+                    <span class="chip">Trigger Handler</span><span class="chip">Queueable</span><span class="chip">Apex Managed Sharing</span>
+                    <span class="chip">Custom Metadata</span><span class="chip">Named Credential</span><span class="chip">Permission Set</span>
+                    <span class="chip">Custom Label · 번역</span><span class="chip">Reports</span><span class="chip">Salesforce CLI</span>
+                </div>
+            </div>
+            <div class="skill reveal">
+                <h3>AI, 연동</h3>
+                <div class="chips">
+                    <span class="chip hot">Azure OpenAI</span><span class="chip hot">MCP (Model Context Protocol)</span><span class="chip hot">Function Calling</span>
+                    <span class="chip">Structured Outputs</span><span class="chip">Azure Document Intelligence</span><span class="chip">Azure AI Foundry Prompt Flow</span>
+                    <span class="chip">OAuth · RFC 9728</span><span class="chip">REST Callout</span><span class="chip">Claude Code</span>
+                </div>
+            </div>
+            <div class="skill reveal">
+                <h3>Language, Tools</h3>
+                <div class="chips">
+                    <span class="chip hot">JavaScript</span><span class="chip hot">Playwright</span><span class="chip">TypeScript</span><span class="chip">React · Remotion</span>
+                    <span class="chip">Java</span><span class="chip">Python</span><span class="chip">PowerShell</span><span class="chip">HTML · CSS</span><span class="chip">Jest</span><span class="chip">Git</span><span class="chip">Oracle</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="projects" class="alt">
+    <div class="wrap">
+        <div class="kicker reveal">Salesforce Projects</div>
+        <h2 class="reveal">만들고, 패키지로 묶고, 고객에게 설치했습니다</h2>
+        <p class="sub reveal">회사에서 Salesforce로 진행한 프로젝트입니다. 카드를 누르면 구현 내용이 펼쳐집니다. 고객사와 사내 제품명은 일반 표현으로 바꿨습니다.</p>
+
+        <div class="filters reveal" role="group" aria-label="프로젝트 분류">
+            <button type="button" class="on" data-filter="all">전체</button>
+            <button type="button" data-filter="pkg">패키징</button>
+            <button type="button" data-filter="ai">AI</button>
+            <button type="button" data-filter="app">업무 앱</button>
+            <button type="button" data-filter="qa">테스트 · 기타</button>
+        </div>
+
+        <div class="cards">
+            <details class="card big reveal" data-cat="pkg">
+                <summary>
+                    <div class="card-top"><span class="badge">2GP Packaging</span><span class="when">2026.09 – 10</span></div>
+                    <h3>SRM 모듈 패키징 — 하나의 org를 16개 패키지로</h3>
+                    <p>구매 관리(SRM) 솔루션 전체를 Managed 2GP 7종 + Unlocked 9종으로 나눠, 고객이 필요한 모듈만 골라 설치할 수 있는 제품으로 만들었습니다.</p>
+                    <div class="nums"><span><b>16</b> 패키지로 분리</span><span><b>9</b> 설치 조합 검증</span><span><b>85%</b> 테스트 커버리지</span></div>
+                    <div class="chips"><span class="chip hot">2GP Managed</span><span class="chip">Unlocked</span><span class="chip">Custom Metadata</span><span class="chip">PowerShell</span></div>
+                </summary>
+                <ul>
+                    <li><b>확장 슬롯 구조</b> — Core가 모듈을 직접 참조하지 않고, Custom Metadata 등록만으로 레코드 페이지 · 액션 버튼 · 유틸리티 바에 모듈 화면을 동적으로 끼워 넣는 LWC/Apex 슬롯 설계. 미설치 모듈은 조용히 건너뜀</li>
+                    <li><b>의존성 끊기</b> — 모듈 간 순환 · 직접 참조를 describe 기반 동적 SOQL과 <code>@NamespaceAccessible</code> 위임 클래스로 분리해 단독 설치 가능하게</li>
+                    <li><b>빌드 · 배포 자동화</b> — 버전 빌드, 사전 점검(LWC 참조 탐지), 설치된 패키지 위 고객 소스 배포 시 네임스페이스 접두어 변환 스크립트</li>
+                    <li><b>권한 · 공유</b> — 검수 담당자 Apex 공유 배치, 포털 사용자 공유를 Platform Event로 처리, 역할별 권한 세트 정비</li>
+                    <li><b>품질</b> — 테스트 커버리지 BOM 57.7% → 85.3%, 리스크 모듈 321개 테스트 통과(90%)</li>
+                    <li><b>전자계약 연동</b> — 발주 시 계약 자동 생성, 최종 서명 시점에 단가 생성 · 겹치는 단가 종료</li>
+                </ul>
+                <p class="more"><a href="https://github.com/leeyongha2006/srm-modular-packaging" target="_blank" rel="noopener">GitHub 저장소 보기 →</a></p>
+            </details>
+
+            <details class="card big reveal" data-cat="ai">
+                <summary>
+                    <div class="card-top"><span class="badge ai">AI Agent · MCP</span><span class="when">2026.08 – 10</span></div>
+                    <h3>SRM AI 에이전트 + Salesforce MCP 서버</h3>
+                    <p>"이 공급사 견적 비교해 줘" 같은 말로 구매 업무를 조회 · 실행하는 에이전트를 만들고, Claude 같은 외부 AI가 원격 커넥터로 SRM을 쓰도록 MCP 서버를 Apex로 직접 구현했습니다.</p>
+                    <div class="nums"><span><b>MCP</b> 프로토콜 직접 구현</span><span><b>0</b> 브라우저 노출 API 키</span></div>
+                    <div class="chips"><span class="chip hot">Azure OpenAI</span><span class="chip hot">MCP</span><span class="chip">Function Calling</span><span class="chip">Structured Outputs</span><span class="chip">OAuth</span></div>
+                </summary>
+                <ul>
+                    <li><b>보안 구조 전환</b> — 브라우저 WebSocket 방식에서 서버 측 Chat Completions로 바꿔 API 키가 브라우저에 노출되지 않게(Named / External Credential)</li>
+                    <li><b>도구를 데이터로</b> — 도구 정의를 레코드 · Custom Metadata로 관리하고, 범용 실행기 3종(연쇄 조회 · 비교 · 필터 목록) + 스키마 가드(describe 재검증)로 동적 SOQL 보안 확보</li>
+                    <li><b>도구 자동 생성 파이프라인</b> — 처리 못 한 요청을 모아 Structured Outputs(json_schema strict)로 도구 초안 생성 → 스키마 검증 → 자동 배포 · dry-run → 실패 누적 시 자동 비활성화</li>
+                    <li><b>개인정보</b> — 대화 저장 시 이름을 토큰으로 바꿔 저장하고 불러올 때 복원(타입당 SOQL 1회)</li>
+                    <li><b>MCP 서버</b> — Apex REST로 MCP Streamable HTTP(initialize · tools/list · tools/call · resources)를 직접 구현, OAuth 보호 리소스 메타데이터(RFC 9728) 지원, AI 답변 안에 평가지 화면을 띄우는 MCP Apps(ui:// 리소스)</li>
+                    <li><b>쓰기 안전장치</b> — 쓰기 도구는 요약 → 사용자 확인 → 실행 2단계, 확인 단계 서명 검증(HMAC)</li>
+                </ul>
+                <p class="more"><a href="https://github.com/leeyongha2006/srm-ai-agent-mcp" target="_blank" rel="noopener">GitHub 저장소 보기 →</a></p>
+            </details>
+
+            <details class="card reveal" data-cat="pkg app">
+                <summary>
+                    <div class="card-top"><span class="badge">Framework</span><span class="when">2026.05 – 09</span></div>
+                    <h3>노코드 알림 프레임워크 V3</h3>
+                    <p>관리자가 화면에서 규칙만 만들면 실시간 · 생성 · 예약 알림을 벨 · 이메일 · Task · Chatter로 보내는 프레임워크. 기존 버전을 V3로 고도화하고 패키징 · 운영 안정화를 맡았습니다.</p>
+                    <div class="chips"><span class="chip hot">Tooling API</span><span class="chip">Queueable · Batch</span><span class="chip">i18n 4개 언어</span><span class="chip">2GP</span></div>
+                </summary>
+                <ul>
+                    <li><b>Tooling API로 Record-Triggered Flow 자동 생성 · 활성화</b></li>
+                    <li><b>수신자 언어별 알림</b>(ko · en · ja · zh) — 번역을 Custom Metadata로 관리하도록 리팩터링</li>
+                    <li><b>중복 발송 버그 해결</b> — 「조건 필드가 바뀌었나」 대신 「전체 조건식이 false → true로 바뀌었나」를 메모리에서 계산</li>
+                    <li><b>보안 보강</b> — 동적 SOQL 오브젝트 화이트리스트, <code>insert as user</code>로 FLS 강제, USER_MODE 조회 공백 문제 해결</li>
+                    <li>「생성」 알림 유형 추가, 예약 모니터링 큐 재설계, 손상 데이터 하나로 화면 전체가 죽던 문제 수정, PRD · 운영 가이드 작성</li>
+                </ul>
+                <p class="more"><a href="https://github.com/leeyongha2006/salesforce-notification-framework" target="_blank" rel="noopener">GitHub 저장소 보기 →</a></p>
+            </details>
+
+            <details class="card reveal" data-cat="qa ai">
+                <summary>
+                    <div class="card-top"><span class="badge qa">QA Automation</span><span class="when">2026.07</span></div>
+                    <h3>AI 에이전트 기반 E2E 테스트 파이프라인</h3>
+                    <p>Playwright + Claude 서브에이전트(계획 · 검증 · 생성 · 자가 수정 · 결과 검증 · 갱신 6개 역할)로 구매 업무 10개 모듈의 회귀 테스트를 만들어 전체 통과시켰습니다.</p>
+                    <div class="nums"><span><b>207</b> spec 통과</span><span><b>10</b> 테스트 플랜</span></div>
+                    <div class="chips"><span class="chip hot">Playwright</span><span class="chip">Playwright MCP</span><span class="chip">Claude Code</span></div>
+                </summary>
+                <ul>
+                    <li>앱 소스(LWC/Apex)를 근거로 시나리오 작성, 실제 화면 조작 기록으로 spec 생성해 셀렉터 추측 방지</li>
+                    <li>Lightning 그리드 특이 동작 · 겹치는 토스트로 인한 간헐 실패 해결, 로그인 세션 저장</li>
+                    <li>구매요청 → 계획 → 발주 → 계약 → 입고 → 검수 → 송장 → 세금계산서 전 흐름</li>
+                    <li>SRM 기능 명세서 20종 작성 · 실제 메타데이터와 대조 검증, 도입 보고서 작성</li>
+                </ul>
+                <p class="more"><a href="https://github.com/leeyongha2006/srm-e2e-test-automation" target="_blank" rel="noopener">GitHub 저장소 보기 →</a></p>
+            </details>
+
+            <details class="card reveal" data-cat="app">
+                <summary>
+                    <div class="card-top"><span class="badge">Dashboard</span><span class="when">2026.07 – 08</span></div>
+                    <h3>공급사 리스크 · 공급망 대시보드</h3>
+                    <p>리스크 · 원가 모듈을 정의서 기준으로 재정비하고, 임원용 대시보드 3종과 BOM 기반 공급망 영향 분석 화면을 만들었습니다.</p>
+                    <div class="chips"><span class="chip hot">LWC</span><span class="chip">Tree Grid</span><span class="chip">Data Viz</span></div>
+                </summary>
+                <ul>
+                    <li>레거시 Apex 29개 이관, 필드 약 80개 명명 규칙 정비, FLS · LIMIT · 쿼리 통합 등 코드 리뷰 반영</li>
+                    <li>리스크 요약 · 원가 인텔리전스 · 지출 절감 임원용 대시보드, 세계 지도 통합</li>
+                    <li>다단계 공급망에서 검증 안 된 하위 티어 · 단일 소스 「사각지대」 탐지, 대체 공급사 제시</li>
+                </ul>
+                <p class="more"><a href="https://github.com/leeyongha2006/srm-risk-supply-chain-dashboard" target="_blank" rel="noopener">GitHub 저장소 보기 →</a></p>
+            </details>
+
+            <details class="card reveal" data-cat="pkg app">
+                <summary>
+                    <div class="card-top"><span class="badge">2GP Packaging</span><span class="when">2026.01 – 09</span></div>
+                    <h3>게시판 · 위키 패키지</h3>
+                    <p>사내 게시판(리치텍스트 · 댓글 · 첨부)과 위키(트리 · Markdown · 포털)를 2GP 관리형 패키지로 만들고, 패키지 환경에서만 생기는 문제들을 해결했습니다.</p>
+                    <div class="chips"><span class="chip hot">2GP</span><span class="chip">Experience Cloud</span><span class="chip">Custom Label 번역</span></div>
+                </summary>
+                <ul>
+                    <li><b>네임스페이스 문제</b> — 패키지 org에서 VF 경로 · 필드명에 네임스페이스가 붙어 첨부 업로드가 실패 → <code>getNamespace()</code>로 동적 처리</li>
+                    <li><b>게스트 이미지</b> — 포털 게스트 사용자에게 이미지가 안 보이던 문제를 ContentDistribution 다운로드 URL로 해결</li>
+                    <li>편집기에서 「/」 입력 시 Salesforce 검색창이 열리던 문제를 캡처 단계 이벤트 차단으로 해결</li>
+                    <li>첨부파일 업로더 신규 개발, 편집기 라벨 70개 등 전체 한국어화, 권한 세트 정리, 패키지 밖 Credential 분리</li>
+                </ul>
+                <p class="more"><a href="https://github.com/leeyongha2006/salesforce-board-wiki-package" target="_blank" rel="noopener">GitHub 저장소 보기 →</a></p>
+            </details>
+        </div>
+
+        
+    </div>
+</section>
+
+<section id="side">
+    <div class="wrap">
+        <div class="kicker reveal">Side Projects</div>
+        <h2 class="reveal">퇴근 후에 만든 것들</h2>
+        <p class="sub reveal">업무 밖에서 직접 기획하고 만든 개인 프로젝트입니다.</p>
+        <div class="cards">
+            <details class="card reveal">
+                <summary>
+                    <div class="card-top"><span class="badge">Automation</span><span class="when">2026.10 –</span></div>
+                    <h3>유튜브 쇼츠 자동 제작 파이프라인</h3>
+                    <p>화제가 되는 주제를 모아 대본, 음성, 영상을 만들고 유튜브 예약 업로드까지 사람 손 없이 3시간마다 돌아가는 시스템입니다.</p>
+                    <div class="chips"><span class="chip hot">Python</span><span class="chip">Gemini TTS</span><span class="chip">ffmpeg</span><span class="chip">Claude Code</span></div>
+                </summary>
+                <ul>
+                    <li><b>주제 수집</b>: 최근 48시간 안에 터진 뉴스와 조회수가 급증한 주제를 모아 화제성 순으로 고름</li>
+                    <li><b>영상 생성</b>: 대본 작성, Gemini TTS 음성, 음성 박자에 맞춘 자막과 컷 편집, 배경 음악 합성</li>
+                    <li><b>지도 쇼츠</b>: NASA 위성 지구본 위에 국가 색칠, 거리선, 크기 비교를 넣는 지도 해설 영상 생성기</li>
+                    <li><b>무인 운영</b>: 품질 기준을 통과한 영상만 예약 업로드하고, 실패한 영상은 고치거나 버림. 상태는 저장소에 커밋해 이어서 실행</li>
+                </ul>
+                <p class="more"><a href="https://github.com/leeyongha2006/shorts-factory" target="_blank" rel="noopener">GitHub 저장소 보기 →</a></p>
+            </details>
+            <details class="card reveal">
+                <summary>
+                    <div class="card-top"><span class="badge">Web App</span><span class="when">2026.07 – 10</span></div>
+                    <h3>최애친구 랭킹</h3>
+                    <p>카카오톡, 인스타그램에서 내보낸 파일을 올리면 한 달 동안 가장 많이 대화한 친구 TOP 5를 뽑아 공유용 카드로 만들어 줍니다.</p>
+                    <div class="chips"><span class="chip hot">JavaScript</span><span class="chip">Claude API</span><span class="chip">Figma</span><span class="chip">디자인 시스템</span></div>
+                </summary>
+                <ul>
+                    <li><b>개인정보</b>: 카카오, 인스타그램 API를 쓰지 않고 사용자가 직접 내보낸 파일만 분석, 원문은 저장하지 않음</li>
+                    <li><b>점수 설계</b>: 채널별 최다 친구를 100점으로 정규화하고 인스타그램 반응에 가중치를 줘 합산</li>
+                    <li><b>공유 카드</b>: 포토카드 느낌의 홀로그램 카드와 AI 한 줄 코멘트로 SNS 공유 유도</li>
+                    <li>기획(유저 플로우, 기능 명세)부터 와이어프레임, 디자인 시스템까지 직접 작성</li>
+                </ul>
+                <p class="more"><a href="https://github.com/leeyongha2006/choeae-ranking" target="_blank" rel="noopener">GitHub 저장소 보기 →</a></p>
+            </details>
+            <details class="card reveal">
+                <summary>
+                    <div class="card-top"><span class="badge">Mobile App</span><span class="when">2026.07</span></div>
+                    <h3>구독 관리 앱</h3>
+                    <p>흩어져 있는 구독 서비스를 한곳에서 보고, 결제일 알림과 월별 지출 리포트를 받는 모바일 앱입니다.</p>
+                    <div class="chips"><span class="chip hot">React Native</span><span class="chip">Expo Router</span><span class="chip">Supabase</span><span class="chip">TypeScript</span></div>
+                </summary>
+                <ul>
+                    <li>대시보드, 구독 목록, 알림, 리포트, 설정 5개 탭 화면</li>
+                    <li>Supabase 인증, DB 마이그레이션, Edge Functions로 서버 로직 구성</li>
+                    <li>온보딩, 로그인, 회원가입과 Gmail 연동으로 구독 결제 메일 인식</li>
+                </ul>
+                <p class="more"><a href="https://github.com/leeyongha2006/Subscription-Management-App" target="_blank" rel="noopener">GitHub 저장소 보기 →</a></p>
+            </details>
+            <details class="card reveal">
+                <summary>
+                    <div class="card-top"><span class="badge">Basics</span><span class="when">2023 – 2024</span></div>
+                    <h3>웹, Java 기초 프로젝트</h3>
+                    <p>개발을 처음 배우며 만든 작은 프로젝트들입니다. 계산기, 캘린더, 이미지 검색, 쇼핑몰 회원가입, 투표 프로그램 등.</p>
+                    <div class="chips"><span class="chip">JavaScript</span><span class="chip">Java</span><span class="chip">JSP</span><span class="chip">Oracle</span></div>
+                </summary>
+                <p class="more"><a href="https://github.com/leeyongha2006?tab=repositories" target="_blank" rel="noopener">GitHub 저장소 보기 →</a></p>
+            </details>
+        </div>
+    </div>
+</section>
+
+<section id="demo">
+    <div class="wrap">
+        <div class="kicker reveal">Live Demo</div>
+        <h2 class="reveal">직접 해보는 문서 버전 비교</h2>
+        <p class="sub reveal">줄 단위 Myers diff로 맞춘 뒤 바뀐 단어만 강조하는 비교 엔진을 직접 구현했습니다. 코드는 이 사이트 저장소에 있습니다. 아래 내용을 고쳐 보세요.</p>
+        <div class="demo reveal">
+            <div class="demo-inputs">
+                <div>
+                    <label for="before">v1 (이전 버전)</label>
+                    <textarea id="before">1. 목적
+본 문서는 브레이크 모듈의 내구 시험 절차를 정의한다.
+2. 시험 조건
+시험 온도는 -30℃ ~ 80℃ 로 한다.
+반복 횟수는 10만 회로 한다.
+3. 판정 기준
+마모량이 0.5mm 이하이면 합격으로 한다.</textarea>
+                </div>
+                <div>
+                    <label for="after">v2 (새 버전)</label>
+                    <textarea id="after">1. 목적
+본 문서는 브레이크 모듈의 내구 시험 절차를 정의한다.
+2. 시험 조건
+시험 온도는 -40℃ ~ 85℃ 로 한다.
+반복 횟수는 15만 회로 한다.
+습도 조건은 95% RH 를 추가한다.
+3. 판정 기준
+마모량이 0.3mm 이하이면 합격으로 한다.</textarea>
+                </div>
+            </div>
+            <div class="demo-bar">
+                <div class="summary-line" id="summary"></div>
+                <div class="toggle" role="group" aria-label="보기 방식">
+                    <button type="button" class="on" data-mode="split">나란히</button>
+                    <button type="button" data-mode="unified">통합</button>
+                    <button type="button" data-mode="changes">변경만</button>
+                </div>
+            </div>
+            <div class="diff" id="diff"></div>
+            <p class="demo-note">※ 데모 문서는 예시로 만든 내용이며, 실제 프로젝트 데이터가 아닙니다.</p>
+        </div>
+    </div>
+</section>
+
+<section id="journey" class="alt">
+    <div class="wrap">
+        <div class="kicker reveal">Journey</div>
+        <h2 class="reveal">걸어온 길</h2>
+        <div class="timeline">
+            <div class="tl reveal"><small>2026.08 — 10</small><h3>SRM AI 에이전트 · MCP · 모듈 패키징</h3><p>Azure OpenAI 업무 에이전트, Apex로 MCP 서버 구현, SRM을 2GP 패키지 16종으로 분리 · 설치 검증</p></div>
+            <div class="tl reveal"><small>2026.07 — 08</small><h3>SRM 품질 · 대시보드</h3><p>기능 명세서 20종, AI 에이전트 기반 E2E 테스트 207개 통과, 리스크 · 공급망 대시보드</p></div>
+            <div class="tl reveal"><small>2026.04 — 09</small><h3>사내 솔루션 패키지</h3><p>노코드 알림 프레임워크 V3 고도화, 게시판 2GP 패키징</p></div>
+            <div class="tl reveal"><small>2026.01 — 02</small><h3>위키 패키지</h3><p>2GP 관리형 패키징, 포털 게스트 접근 · 다국어 · 권한 세트 정리</p></div>
+            <div class="tl reveal"><small>2025</small><h3>Salesforce 개발 시작</h3><p>SRM 업무 화면 개발로 Apex, LWC 실무 시작</p></div>
+            <div class="tl reveal"><small>2023 — 2024</small><h3>개발 입문</h3><p>JavaScript 미니 프로젝트 10여 개, Java · JSP · Oracle 웹 프로그램</p></div>
+        </div>
+    </div>
+</section>
+
+<section id="contact">
+    <div class="wrap">
+        <div class="kicker reveal">Contact</div>
+        <h2 class="reveal">함께 일하고 싶으시다면</h2>
+        <p class="sub reveal">편하게 연락 주세요. 빠르게 답장드리겠습니다.</p>
+        <div class="contacts">
+            <a class="contact reveal" href="mailto:haiyong588@gmail.com">
+                <span class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+                <span><small>Email</small><strong>haiyong588@gmail.com</strong></span>
+            </a>
+            <a class="contact reveal" href="tel:+821045929817">
+                <span class="icon"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></span>
+                <span><small>Phone</small><strong>010-4592-9817</strong></span>
+            </a>
+            <a class="contact reveal" href="https://github.com/leeyongha2006" target="_blank" rel="noopener">
+                <span class="icon"><svg viewBox="0 0 24 24"><path d="M9 19c-4 1.5-4-2-6-2.5m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></span>
+                <span><small>GitHub</small><strong>github.com/leeyongha2006</strong></span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="wrap">
+        <p>© 2026 Lee Yong Ha · <a href="https://github.com/leeyongha2006" target="_blank" rel="noopener">github.com/leeyongha2006</a></p>
+        <p>이 사이트의 프로젝트 설명은 공개 가능한 범위로 정리했으며 회사 소스 코드를 포함하지 않습니다.</p>
+    </div>
+</footer>
+
+<script>
+(function () {
+    "use strict";
+
+    /* ---------- reveal & counters ---------- */
+    const revealTargets = document.querySelectorAll(".reveal");
+    const showAll = () => revealTargets.forEach((el) => el.classList.add("show"));
+    if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("show");
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+        revealTargets.forEach((el) => observer.observe(el));
+    } else {
+        showAll();
+    }
+
+    const counters = document.querySelectorAll("[data-count]");
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    counters.forEach((el) => {
+        const target = Number(el.dataset.count);
+        const suffix = el.dataset.suffix || "";
+        if (reduceMotion) {
+            el.textContent = target + suffix;
+            return;
+        }
+        const start = performance.now();
+        const duration = 1200;
+        const tick = (now) => {
+            const progress = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.round(target * eased) + suffix;
+            if (progress < 1) {
+                requestAnimationFrame(tick);
+            }
+        };
+        requestAnimationFrame(tick);
+    });
+
+    /* ---------- project filter ---------- */
+    const filterButtons = document.querySelectorAll(".filters button");
+    const filterTargets = document.querySelectorAll("#projects [data-cat]");
+    filterButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            const filter = button.dataset.filter;
+            filterButtons.forEach((other) => other.classList.toggle("on", other === button));
+            filterTargets.forEach((target) => {
+                const categories = target.dataset.cat.split(" ");
+                target.classList.toggle("hidden", filter !== "all" && !categories.includes(filter));
+            });
+        });
+    });
+
+    /* ---------- diff engine (demo) ---------- */
+    const EQUAL = 0;
+    const DELETE = 1;
+    const INSERT = 2;
+    const TOKEN_PATTERN = /\s+|[A-Za-z0-9_.]+|[가-힣]+|./gu;
+    const WORD_DIFF_MIN_RATIO = 0.3;
+    const CONTEXT_LINES = 1;
+
+    // Myers O(ND): a, b 는 비교할 배열, 결과는 [type, value] 목록
+    function myers(a, b) {
+        const n = a.length;
+        const m = b.length;
+        const max = n + m;
+        const offset = max + 1;
+        const v = new Int32Array(2 * max + 3);
+        const trace = [];
+        let found = false;
+        for (let d = 0; d <= max && !found; d++) {
+            trace.push(v.slice());
+            for (let k = -d; k <= d; k += 2) {
+                let x = (k === -d || (k !== d && v[offset + k - 1] < v[offset + k + 1]))
+                    ? v[offset + k + 1]
+                    : v[offset + k - 1] + 1;
+                let y = x - k;
+                while (x < n && y < m && a[x] === b[y]) {
+                    x++;
+                    y++;
+                }
+                v[offset + k] = x;
+                if (x >= n && y >= m) {
+                    found = true;
+                    break;
+                }
+            }
+        }
+        const ops = [];
+        let x = n;
+        let y = m;
+        for (let d = trace.length - 1; d >= 0; d--) {
+            const vd = trace[d];
+            const k = x - y;
+            const prevK = (k === -d || (k !== d && vd[offset + k - 1] < vd[offset + k + 1])) ? k + 1 : k - 1;
+            const prevX = vd[offset + prevK];
+            const prevY = prevX - prevK;
+            while (x > prevX && y > prevY) {
+                ops.push([EQUAL, a[--x]]);
+                y--;
+            }
+            if (d > 0) {
+                if (x === prevX) {
+                    ops.push([INSERT, b[--y]]);
+                } else {
+                    ops.push([DELETE, a[--x]]);
+                }
+            }
+        }
+        return ops.reverse();
+    }
+
+    function escapeHtml(text) {
+        return text.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[c]));
+    }
+
+    function wordDiff(oldLine, newLine) {
+        const a = oldLine.match(TOKEN_PATTERN) || [];
+        const b = newLine.match(TOKEN_PATTERN) || [];
+        const ops = myers(a, b);
+        const equalLength = ops.filter((op) => op[0] === EQUAL).reduce((sum, op) => sum + op[1].length, 0);
+        const longest = Math.max(oldLine.length, newLine.length, 1);
+        if (equalLength / longest < WORD_DIFF_MIN_RATIO) {
+            return {
+                oldHtml: "<mark class=\"d\">" + escapeHtml(oldLine) + "</mark>",
+                newHtml: "<mark class=\"i\">" + escapeHtml(newLine) + "</mark>"
+            };
+        }
+        let oldHtml = "";
+        let newHtml = "";
+        ops.forEach(([type, token]) => {
+            const safe = escapeHtml(token);
+            if (type === EQUAL) {
+                oldHtml += safe;
+                newHtml += safe;
+            } else if (type === DELETE) {
+                oldHtml += "<mark class=\"d\">" + safe + "</mark>";
+            } else {
+                newHtml += "<mark class=\"i\">" + safe + "</mark>";
+            }
+        });
+        return { oldHtml, newHtml };
+    }
+
+    // 줄 비교 결과를 화면 행으로: 연속된 삭제 · 추가를 짝지어 단어 비교
+    function buildRows(before, after) {
+        const ops = myers(before, after);
+        const rows = [];
+        let i = 0;
+        while (i < ops.length) {
+            if (ops[i][0] === EQUAL) {
+                const safe = escapeHtml(ops[i][1]);
+                rows.push({ type: "equal", oldHtml: safe, newHtml: safe });
+                i++;
+                continue;
+            }
+            const deleted = [];
+            const inserted = [];
+            while (i < ops.length && ops[i][0] !== EQUAL) {
+                (ops[i][0] === DELETE ? deleted : inserted).push(ops[i][1]);
+                i++;
+            }
+            const pairCount = Math.max(deleted.length, inserted.length);
+            for (let p = 0; p < pairCount; p++) {
+                const oldLine = deleted[p];
+                const newLine = inserted[p];
+                if (oldLine !== undefined && newLine !== undefined) {
+                    rows.push({ type: "change", ...wordDiff(oldLine, newLine) });
+                } else if (oldLine !== undefined) {
+                    rows.push({ type: "delete", oldHtml: "<mark class=\"d\">" + escapeHtml(oldLine) + "</mark>", newHtml: "" });
+                } else {
+                    rows.push({ type: "insert", oldHtml: "", newHtml: "<mark class=\"i\">" + escapeHtml(newLine) + "</mark>" });
+                }
+            }
+        }
+        return rows;
+    }
+
+    const beforeInput = document.getElementById("before");
+    const afterInput = document.getElementById("after");
+    const diffBox = document.getElementById("diff");
+    const summaryBox = document.getElementById("summary");
+    const modeButtons = document.querySelectorAll(".toggle button");
+    let mode = "split";
+
+    function visibleRows(rows) {
+        if (mode !== "changes") {
+            return rows;
+        }
+        const keep = new Set();
+        rows.forEach((row, index) => {
+            if (row.type !== "equal") {
+                for (let c = index - CONTEXT_LINES; c <= index + CONTEXT_LINES; c++) {
+                    keep.add(c);
+                }
+            }
+        });
+        return rows.filter((row, index) => keep.has(index));
+    }
+
+    function render() {
+        const rows = buildRows(beforeInput.value.split("\n"), afterInput.value.split("\n"));
+        const changed = rows.filter((row) => row.type === "change").length;
+        const added = rows.filter((row) => row.type === "insert").length;
+        const removed = rows.filter((row) => row.type === "delete").length;
+        summaryBox.innerHTML = (changed + added + removed) === 0
+            ? "두 버전이 같습니다."
+            : "수정 " + changed + "줄 · <span class=\"ins\">추가 " + added + "줄</span> · <span class=\"del\">삭제 " + removed + "줄</span>";
+
+        let html = "";
+        if (mode === "unified") {
+            visibleRows(rows).forEach((row) => {
+                if (row.type === "equal") {
+                    html += "<div class=\"row\"><div class=\"sign\"></div><div class=\"cell\">" + row.newHtml + "</div></div>";
+                    return;
+                }
+                if (row.oldHtml) {
+                    html += "<div class=\"row\"><div class=\"sign\">−</div><div class=\"cell del\">" + row.oldHtml + "</div></div>";
+                }
+                if (row.newHtml) {
+                    html += "<div class=\"row\"><div class=\"sign\">+</div><div class=\"cell ins\">" + row.newHtml + "</div></div>";
+                }
+            });
+            diffBox.className = "diff unified";
+        } else {
+            visibleRows(rows).forEach((row) => {
+                const oldClass = row.type === "equal" ? "" : " del";
+                const newClass = row.type === "equal" ? "" : " ins";
+                html += "<div class=\"row\"><div class=\"cell" + oldClass + "\">" + row.oldHtml + "</div><div class=\"cell" + newClass + "\">" + row.newHtml + "</div></div>";
+            });
+            diffBox.className = "diff";
+        }
+        diffBox.innerHTML = html;
+    }
+
+    modeButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            mode = button.dataset.mode;
+            modeButtons.forEach((other) => other.classList.toggle("on", other === button));
+            render();
+        });
+    });
+    beforeInput.addEventListener("input", render);
+    afterInput.addEventListener("input", render);
+    render();
+})();
+</script>
+</body>
+</html>
