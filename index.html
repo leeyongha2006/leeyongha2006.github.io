@@ -203,38 +203,6 @@ details.dive[open] summary::after { content: "−"; }
 details.dive p, details.dive ul { color: var(--muted); font-size: 15px; margin: 12px 0 0; }
 details.dive ul { padding-left: 18px; }
 
-/* demo */
-.demo { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 28px; box-shadow: var(--shadow); }
-.demo-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-@media (max-width: 760px) { .demo-inputs { grid-template-columns: 1fr; } }
-.demo label { font-size: 13px; font-weight: 700; color: var(--muted); }
-.demo textarea {
-    width: 100%; min-height: 150px; margin-top: 6px; resize: vertical;
-    border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px;
-    background: var(--surface-2); color: var(--text); font: 14px/1.6 "Pretendard", sans-serif;
-}
-.demo-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin: 18px 0 14px; }
-.toggle { display: inline-flex; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
-.toggle button {
-    border: 0; background: transparent; color: var(--muted); padding: 8px 14px;
-    font: 600 13px "Pretendard", sans-serif; cursor: pointer;
-}
-.toggle button.on { background: var(--brand); color: #fff; }
-.summary-line { font-size: 14px; font-weight: 700; }
-.summary-line .ins { color: var(--ins-fg); } .summary-line .del { color: var(--del-fg); }
-.diff { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; font-size: 14px; }
-.diff .row { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); }
-.diff .row:first-child { border-top: 0; }
-.diff .cell { padding: 8px 12px; white-space: pre-wrap; word-break: break-word; min-height: 36px; }
-.diff .cell + .cell { border-left: 1px solid var(--line); }
-.diff .cell.del { background: color-mix(in srgb, var(--del-bg) 60%, transparent); }
-.diff .cell.ins { background: color-mix(in srgb, var(--ins-bg) 60%, transparent); }
-.diff.unified .row { grid-template-columns: 28px 1fr; }
-.diff .sign { padding: 8px 0; text-align: center; color: var(--muted); font-weight: 800; }
-.diff mark.d { background: var(--del-bg); color: var(--del-fg); text-decoration: line-through; border-radius: 4px; padding: 0 2px; outline: 1px solid color-mix(in srgb, var(--del-fg) 40%, transparent); }
-.diff mark.i { background: var(--ins-bg); color: var(--ins-fg); border-radius: 4px; padding: 0 2px; outline: 1px solid color-mix(in srgb, var(--ins-fg) 40%, transparent); }
-.demo-note { font-size: 13px; color: var(--muted); margin-top: 12px; }
-
 /* timeline */
 .timeline { position: relative; padding-left: 26px; }
 .timeline::before { content: ""; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 2px; background: var(--line); }
@@ -346,7 +314,6 @@ footer { padding: 50px 0 60px; text-align: center; color: var(--muted); font-siz
             <li><a href="#skills">Skills</a></li>
             <li><a href="#projects">Salesforce</a></li>
             <li><a href="#side">Side</a></li>
-            <li><a href="#demo">Live Demo</a></li>
             <li><a href="#journey">Journey</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
@@ -364,7 +331,6 @@ footer { padding: 50px 0 60px; text-align: center; color: var(--muted); font-siz
         <p class="lead">Salesforce 위에서 <b>2GP 패키지 설계</b>, <b>AI 에이전트 · MCP 서버</b>, <b>업무 화면(LWC)</b>까지 — 하나의 솔루션을 제품으로 만들어 고객에게 설치되는 데까지 책임집니다.</p>
         <div class="cta">
             <a class="btn primary" href="#projects">프로젝트 보기 →</a>
-            <a class="btn" href="#demo">문서 비교 데모 해보기</a>
             <a class="btn" href="#contact">연락하기</a>
         </div>
 
@@ -613,49 +579,6 @@ footer { padding: 50px 0 60px; text-align: center; color: var(--muted); font-siz
     </div>
 </section>
 
-<section id="demo">
-    <div class="wrap">
-        <div class="kicker reveal">Live Demo</div>
-        <h2 class="reveal">직접 해보는 문서 버전 비교</h2>
-        <p class="sub reveal">줄 단위 Myers diff로 맞춘 뒤 바뀐 단어만 강조하는 비교 엔진을 직접 구현했습니다. 코드는 이 사이트 저장소에 있습니다. 아래 내용을 고쳐 보세요.</p>
-        <div class="demo reveal">
-            <div class="demo-inputs">
-                <div>
-                    <label for="before">v1 (이전 버전)</label>
-                    <textarea id="before">1. 목적
-본 문서는 브레이크 모듈의 내구 시험 절차를 정의한다.
-2. 시험 조건
-시험 온도는 -30℃ ~ 80℃ 로 한다.
-반복 횟수는 10만 회로 한다.
-3. 판정 기준
-마모량이 0.5mm 이하이면 합격으로 한다.</textarea>
-                </div>
-                <div>
-                    <label for="after">v2 (새 버전)</label>
-                    <textarea id="after">1. 목적
-본 문서는 브레이크 모듈의 내구 시험 절차를 정의한다.
-2. 시험 조건
-시험 온도는 -40℃ ~ 85℃ 로 한다.
-반복 횟수는 15만 회로 한다.
-습도 조건은 95% RH 를 추가한다.
-3. 판정 기준
-마모량이 0.3mm 이하이면 합격으로 한다.</textarea>
-                </div>
-            </div>
-            <div class="demo-bar">
-                <div class="summary-line" id="summary"></div>
-                <div class="toggle" role="group" aria-label="보기 방식">
-                    <button type="button" class="on" data-mode="split">나란히</button>
-                    <button type="button" data-mode="unified">통합</button>
-                    <button type="button" data-mode="changes">변경만</button>
-                </div>
-            </div>
-            <div class="diff" id="diff"></div>
-            <p class="demo-note">※ 데모 문서는 예시로 만든 내용이며, 실제 프로젝트 데이터가 아닙니다.</p>
-        </div>
-    </div>
-</section>
-
 <section id="journey" class="alt">
     <div class="wrap">
         <div class="kicker reveal">Journey</div>
@@ -756,199 +679,6 @@ footer { padding: 50px 0 60px; text-align: center; color: var(--muted); font-siz
             });
         });
     });
-
-    /* ---------- diff engine (demo) ---------- */
-    const EQUAL = 0;
-    const DELETE = 1;
-    const INSERT = 2;
-    const TOKEN_PATTERN = /\s+|[A-Za-z0-9_.]+|[가-힣]+|./gu;
-    const WORD_DIFF_MIN_RATIO = 0.3;
-    const CONTEXT_LINES = 1;
-
-    // Myers O(ND): a, b 는 비교할 배열, 결과는 [type, value] 목록
-    function myers(a, b) {
-        const n = a.length;
-        const m = b.length;
-        const max = n + m;
-        const offset = max + 1;
-        const v = new Int32Array(2 * max + 3);
-        const trace = [];
-        let found = false;
-        for (let d = 0; d <= max && !found; d++) {
-            trace.push(v.slice());
-            for (let k = -d; k <= d; k += 2) {
-                let x = (k === -d || (k !== d && v[offset + k - 1] < v[offset + k + 1]))
-                    ? v[offset + k + 1]
-                    : v[offset + k - 1] + 1;
-                let y = x - k;
-                while (x < n && y < m && a[x] === b[y]) {
-                    x++;
-                    y++;
-                }
-                v[offset + k] = x;
-                if (x >= n && y >= m) {
-                    found = true;
-                    break;
-                }
-            }
-        }
-        const ops = [];
-        let x = n;
-        let y = m;
-        for (let d = trace.length - 1; d >= 0; d--) {
-            const vd = trace[d];
-            const k = x - y;
-            const prevK = (k === -d || (k !== d && vd[offset + k - 1] < vd[offset + k + 1])) ? k + 1 : k - 1;
-            const prevX = vd[offset + prevK];
-            const prevY = prevX - prevK;
-            while (x > prevX && y > prevY) {
-                ops.push([EQUAL, a[--x]]);
-                y--;
-            }
-            if (d > 0) {
-                if (x === prevX) {
-                    ops.push([INSERT, b[--y]]);
-                } else {
-                    ops.push([DELETE, a[--x]]);
-                }
-            }
-        }
-        return ops.reverse();
-    }
-
-    function escapeHtml(text) {
-        return text.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[c]));
-    }
-
-    function wordDiff(oldLine, newLine) {
-        const a = oldLine.match(TOKEN_PATTERN) || [];
-        const b = newLine.match(TOKEN_PATTERN) || [];
-        const ops = myers(a, b);
-        const equalLength = ops.filter((op) => op[0] === EQUAL).reduce((sum, op) => sum + op[1].length, 0);
-        const longest = Math.max(oldLine.length, newLine.length, 1);
-        if (equalLength / longest < WORD_DIFF_MIN_RATIO) {
-            return {
-                oldHtml: "<mark class=\"d\">" + escapeHtml(oldLine) + "</mark>",
-                newHtml: "<mark class=\"i\">" + escapeHtml(newLine) + "</mark>"
-            };
-        }
-        let oldHtml = "";
-        let newHtml = "";
-        ops.forEach(([type, token]) => {
-            const safe = escapeHtml(token);
-            if (type === EQUAL) {
-                oldHtml += safe;
-                newHtml += safe;
-            } else if (type === DELETE) {
-                oldHtml += "<mark class=\"d\">" + safe + "</mark>";
-            } else {
-                newHtml += "<mark class=\"i\">" + safe + "</mark>";
-            }
-        });
-        return { oldHtml, newHtml };
-    }
-
-    // 줄 비교 결과를 화면 행으로: 연속된 삭제 · 추가를 짝지어 단어 비교
-    function buildRows(before, after) {
-        const ops = myers(before, after);
-        const rows = [];
-        let i = 0;
-        while (i < ops.length) {
-            if (ops[i][0] === EQUAL) {
-                const safe = escapeHtml(ops[i][1]);
-                rows.push({ type: "equal", oldHtml: safe, newHtml: safe });
-                i++;
-                continue;
-            }
-            const deleted = [];
-            const inserted = [];
-            while (i < ops.length && ops[i][0] !== EQUAL) {
-                (ops[i][0] === DELETE ? deleted : inserted).push(ops[i][1]);
-                i++;
-            }
-            const pairCount = Math.max(deleted.length, inserted.length);
-            for (let p = 0; p < pairCount; p++) {
-                const oldLine = deleted[p];
-                const newLine = inserted[p];
-                if (oldLine !== undefined && newLine !== undefined) {
-                    rows.push({ type: "change", ...wordDiff(oldLine, newLine) });
-                } else if (oldLine !== undefined) {
-                    rows.push({ type: "delete", oldHtml: "<mark class=\"d\">" + escapeHtml(oldLine) + "</mark>", newHtml: "" });
-                } else {
-                    rows.push({ type: "insert", oldHtml: "", newHtml: "<mark class=\"i\">" + escapeHtml(newLine) + "</mark>" });
-                }
-            }
-        }
-        return rows;
-    }
-
-    const beforeInput = document.getElementById("before");
-    const afterInput = document.getElementById("after");
-    const diffBox = document.getElementById("diff");
-    const summaryBox = document.getElementById("summary");
-    const modeButtons = document.querySelectorAll(".toggle button");
-    let mode = "split";
-
-    function visibleRows(rows) {
-        if (mode !== "changes") {
-            return rows;
-        }
-        const keep = new Set();
-        rows.forEach((row, index) => {
-            if (row.type !== "equal") {
-                for (let c = index - CONTEXT_LINES; c <= index + CONTEXT_LINES; c++) {
-                    keep.add(c);
-                }
-            }
-        });
-        return rows.filter((row, index) => keep.has(index));
-    }
-
-    function render() {
-        const rows = buildRows(beforeInput.value.split("\n"), afterInput.value.split("\n"));
-        const changed = rows.filter((row) => row.type === "change").length;
-        const added = rows.filter((row) => row.type === "insert").length;
-        const removed = rows.filter((row) => row.type === "delete").length;
-        summaryBox.innerHTML = (changed + added + removed) === 0
-            ? "두 버전이 같습니다."
-            : "수정 " + changed + "줄 · <span class=\"ins\">추가 " + added + "줄</span> · <span class=\"del\">삭제 " + removed + "줄</span>";
-
-        let html = "";
-        if (mode === "unified") {
-            visibleRows(rows).forEach((row) => {
-                if (row.type === "equal") {
-                    html += "<div class=\"row\"><div class=\"sign\"></div><div class=\"cell\">" + row.newHtml + "</div></div>";
-                    return;
-                }
-                if (row.oldHtml) {
-                    html += "<div class=\"row\"><div class=\"sign\">−</div><div class=\"cell del\">" + row.oldHtml + "</div></div>";
-                }
-                if (row.newHtml) {
-                    html += "<div class=\"row\"><div class=\"sign\">+</div><div class=\"cell ins\">" + row.newHtml + "</div></div>";
-                }
-            });
-            diffBox.className = "diff unified";
-        } else {
-            visibleRows(rows).forEach((row) => {
-                const oldClass = row.type === "equal" ? "" : " del";
-                const newClass = row.type === "equal" ? "" : " ins";
-                html += "<div class=\"row\"><div class=\"cell" + oldClass + "\">" + row.oldHtml + "</div><div class=\"cell" + newClass + "\">" + row.newHtml + "</div></div>";
-            });
-            diffBox.className = "diff";
-        }
-        diffBox.innerHTML = html;
-    }
-
-    modeButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-            mode = button.dataset.mode;
-            modeButtons.forEach((other) => other.classList.toggle("on", other === button));
-            render();
-        });
-    });
-    beforeInput.addEventListener("input", render);
-    afterInput.addEventListener("input", render);
-    render();
 })();
 </script>
 </body>
