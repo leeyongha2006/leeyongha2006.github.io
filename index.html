@@ -440,7 +440,7 @@ footer { padding: 50px 0 60px; text-align: center; color: var(--muted); font-siz
                 <summary>
                     <div class="card-top"><span class="badge">반도체 제조 고객사</span><span class="when">2025.09 – 2026.03</span></div>
                     <h3>수요 · 장비 가동률 예측과 AI 분석 리포트</h3>
-                    <p>고객 수요 예측 엑셀로 장비별 생산능력과 가동률을 계산하는 예측 화면, 생성형 AI 분석 리포트, 생산계획 대비 실적, AWS Lambda 연동을 개발했습니다.</p>
+                    <p>고객 수요 예측 엑셀로 장비별 생산능력과 가동률을 계산하는 예측 화면, 생성형 AI 분석 리포트, 생산계획 대비 실적, 뉴스 클리핑, AWS Lambda 로 PPT · 뉴스를 자동 반영하는 연동을 개발했습니다.</p>
                     <div class="nums"><span><b>9,000행</b> 한 번에 처리</span><span><b>AWS</b> Lambda 연동</span></div>
                     <div class="chips"><span class="chip hot">Apex</span><span class="chip hot">LWC</span><span class="chip">Chart.js</span><span class="chip">Agentforce</span><span class="chip">AWS Lambda</span><span class="chip">Python</span></div>
                 </summary>
@@ -448,7 +448,8 @@ footer { padding: 50px 0 60px; text-align: center; color: var(--muted); font-siz
                     <li><b>수요 · 장비 가동률 예측</b>: 수요 예측 엑셀을 브라우저에서 읽어 장비별 생산능력 · 가동률 계산, 월 · 주 단위 자동 판별, 수요 막대 + 가동률 선 복합 차트</li>
                     <li><b>AI 예측 분석 리포트</b>: LWC → Apex → Flow → Agentforce 로 호출, Einstein 프롬프트로 예측 버전 비교 리포트 생성, PDF 출력</li>
                     <li><b>생산계획 대비 실적</b>: 다섯 달 치 계획과 실적으로 달성률 · 1개월 · 3개월 변동률 자동 계산, CSV 업로드</li>
-                    <li><b>AWS 연동</b>: Python Lambda 가 매일 뉴스를 모아 요약해 Salesforce 에 반영(JWT Bearer, Secrets Manager), S3 파일을 외부 링크로 연결</li>
+                    <li><b>뉴스 클리핑</b>: 뉴스 메일에서 기사를 뽑아 레코드로 만들고, 실패분은 배치로 재처리, Python Lambda 가 매일 본문을 모아 요약해 거래처 화면에 표시</li>
+                    <li><b>PPT 자동 반영</b>: S3 에 올라온 프로젝트 요약 PPT 를 Lambda(python-pptx)가 매일 파싱해 프로젝트 필드로 반영, 파일은 Apex REST 로 레코드에 자동 연결</li>
                 </ul>
                 <p class="more"><a href="https://github.com/leeyongha2006/semiconductor-forecast-salesforce" target="_blank" rel="noopener">GitHub 저장소 보기 →</a></p>
             </details>
