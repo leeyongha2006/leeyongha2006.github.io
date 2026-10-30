@@ -406,7 +406,7 @@ footer { padding: 50px 0 60px; text-align: center; color: var(--muted); font-siz
     <div class="wrap">
         <div class="kicker reveal">Work · Salesforce</div>
         <h2 class="reveal">회사에서 Salesforce로 만든 것들</h2>
-        <p class="sub reveal">고3 때 DKBMC에 Salesforce 개발자로 입사했습니다. 첫 업무로 OData 4.0 작업을 시작했고, 이어서 SRM 공급자 등록 요청을 개발한 뒤 SRM 전체를 맡게 되었습니다. 그 과정에서 반도체 제조 고객사 구축, 사내 솔루션 고도화와 패키징, AI 에이전트와 MCP 서버까지 경험하며 역량을 넓혀 가고 있습니다. 카드를 누르면 구현 내용이 펼쳐집니다.</p>
+        <p class="sub reveal">고3 때 DKBMC에 Salesforce 개발자로 입사했습니다. 첫 업무로 OData 4.0 작업을 시작했고, 이어서 SRM 공급자 등록 요청을 개발한 뒤 SRM 전체를 맡게 되었습니다. 그 과정에서 반도체 · 프랜차이즈 고객사 구축, 교육 솔루션 AI, 사내 솔루션 고도화와 패키징, AI 에이전트와 MCP 서버까지 경험하며 역량을 넓혀 가고 있습니다. 카드를 누르면 구현 내용이 펼쳐집니다.</p>
         <p class="sub reveal" style="font-size:14px;margin-top:-28px">회사 코드는 공개할 수 없어, 각 저장소에는 정리 문서와 핵심 구조를 직접 다시 구현한 예제 코드를 담았습니다. 고객사와 사내 제품명은 일반 표현으로 바꿨습니다.</p>
 
         <div class="filters reveal" role="group" aria-label="프로젝트 분류">
@@ -451,6 +451,37 @@ footer { padding: 50px 0 60px; text-align: center; color: var(--muted); font-siz
                     <li><b>AWS 연동</b>: Python Lambda 가 매일 뉴스를 모아 요약해 Salesforce 에 반영(JWT Bearer, Secrets Manager), S3 파일을 외부 링크로 연결</li>
                 </ul>
                 <p class="more"><a href="https://github.com/leeyongha2006/semiconductor-forecast-salesforce" target="_blank" rel="noopener">GitHub 저장소 보기 →</a></p>
+            </details>
+
+            <details class="card reveal" data-cat="app">
+                <summary>
+                    <div class="card-top"><span class="badge">프랜차이즈 고객사</span><span class="when">2026</span></div>
+                    <h3>전자동의 · 전자동의 현황</h3>
+                    <p>가맹점 포털에서 본사가 동의서를 게시하면 가맹점이 전자로 동의하고, 본사는 가맹점별 동의 현황을 한눈에 관리합니다.</p>
+                    <div class="chips"><span class="chip hot">Apex</span><span class="chip">LWC</span><span class="chip">Experience Cloud</span></div>
+                </summary>
+                <ul>
+                    <li><b>발행</b>: 동의서 공지를 게시하면 대상 가맹점마다 동의 이력을 한 번에 생성</li>
+                    <li><b>대시보드</b>: 동의율을 가맹점 수 기준과 가맹점주 기준 두 가지로 집계</li>
+                    <li><b>현황 관리</b>: 서버 페이지 나눔 목록, 지역 · 팀 필터, 미입력 판별, 엑셀 내보내기</li>
+                </ul>
+                <p class="more"><a href="https://github.com/leeyongha2006/franchise-econsent-salesforce" target="_blank" rel="noopener">GitHub 저장소 보기 →</a></p>
+            </details>
+
+            <details class="card reveal" data-cat="ai app">
+                <summary>
+                    <div class="card-top"><span class="badge ai">교육 솔루션 AI</span><span class="when">2026</span></div>
+                    <h3>AI 학습 상담 · 영업 코칭 (Azure)</h3>
+                    <p>교육 앱의 AI 연동을 Azure AI Foundry 로 옮기고, Prompt Flow 4종으로 학습 상담, 추천, 영업 코칭, 대본 생성을 만들었습니다.</p>
+                    <div class="chips"><span class="chip hot">Azure AI Foundry</span><span class="chip">Prompt Flow</span><span class="chip">Apex</span><span class="chip">Python</span></div>
+                </summary>
+                <ul>
+                    <li><b>AI 학습 상담</b>: 직무와 학습 현황 기반 맞춤 교육 안내, 교육 관련 요청만 답하도록 범위 제한</li>
+                    <li><b>학습 추천 패널</b>: 학습 현황 요약과 다음 행동을 정해진 JSON 형식으로 받아 화면에 표시</li>
+                    <li><b>영업 상담 코칭</b>: 상담 스크립트를 분석해 피드백과 항목별 점수 생성</li>
+                    <li><b>슬라이드 대본 생성</b>: 슬라이드마다 발표 대본 생성, 여러 장은 Queueable 로 처리</li>
+                </ul>
+                <p class="more"><a href="https://github.com/leeyongha2006/lms-ai-coaching-azure" target="_blank" rel="noopener">GitHub 저장소 보기 →</a></p>
             </details>
 
             <details class="card big reveal" data-cat="pkg">
