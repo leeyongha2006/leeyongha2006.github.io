@@ -298,6 +298,14 @@ details.card .more { margin: 14px 0 0; }
 .profile small { display: block; font-size: 12px; font-weight: 800; color: var(--brand); letter-spacing: .06em; }
 .profile strong { display: block; font-size: 20px; margin: 6px 0 2px; letter-spacing: -.02em; }
 .profile span { font-size: 13px; color: var(--muted); }
+.schools { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+@media (max-width: 860px) { .schools { grid-template-columns: 1fr; } }
+.school { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px; }
+.school-head { display: flex; gap: 10px; align-items: baseline; }
+.school-head b { font-size: 17px; }
+.school p { margin: 6px 0 12px; color: var(--muted); font-size: 14px; }
+.school .chip { text-decoration: none; }
+.school .chip:hover { border-color: var(--brand); color: var(--brand); }
 footer { padding: 50px 0 60px; text-align: center; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); }
 .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
 .reveal.show { opacity: 1; transform: none; }
@@ -314,6 +322,7 @@ footer { padding: 50px 0 60px; text-align: center; color: var(--muted); font-siz
             <li><a href="#skills">Skills</a></li>
             <li><a href="#projects">Salesforce</a></li>
             <li><a href="#side">Side</a></li>
+            <li><a href="#school">School</a></li>
             <li><a href="#journey">Journey</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
@@ -582,27 +591,51 @@ footer { padding: 50px 0 60px; text-align: center; color: var(--muted); font-siz
                 </ul>
                 <p class="more">비공개 저장소</p>
             </details>
-            <details class="card reveal">
-                <summary>
-                    <div class="card-top"><span class="badge">Basics</span><span class="when">2023 – 2024</span></div>
-                    <h3>고등학교 때 만든 프로젝트</h3>
-                    <p>고등학교 수업과 방과후 과정에서 만든 프로젝트입니다. 지금 보면 부족한 부분이 많지만, 처음 코드를 배우던 때부터 어떻게 성장해 왔는지 기록으로 남겨 두고 싶어 함께 정리했습니다. 너그럽게 봐 주세요.</p>
-                    <div class="chips"><span class="chip">JavaScript</span><span class="chip">Java</span><span class="chip">JSP</span><span class="chip">Oracle</span></div>
-                </summary>
-                <ul>
-                    <li><b>2024 JavaScript</b>: 계산기, 캘린더, 스톱워치, 이미지 검색 등 작은 앱 13개로 DOM 조작 · 이벤트 · API 호출 연습</li>
-                    <li><b>2024 HTML/CSS</b>: 취업맞춤반 방과후 수업에서 웹 화면 구성</li>
-                    <li><b>2023 Java</b>: 키오스크, 백신 예약, 투표 프로그램으로 클래스 설계 · JavaFX · DB 연동</li>
-                    <li><b>2023 JSP/DB</b>: JSP와 Oracle로 회원가입 기능, SQL 조인</li>
-                    <li><b>2023 자료구조</b>: 트리와 선형 구조를 Java로 직접 구현</li>
-                </ul>
-                <p class="more"><a href="https://github.com/leeyongha2006?tab=repositories" target="_blank" rel="noopener">GitHub 저장소 보기 →</a></p>
-            </details>
         </div>
     </div>
 </section>
 
-<section id="journey" class="alt">
+<section id="school" class="alt">
+    <div class="wrap">
+        <div class="kicker reveal">School Projects</div>
+        <h2 class="reveal">고등학교 때 만든 프로젝트</h2>
+        <p class="sub reveal">고등학교 수업과 방과후 과정에서 만든 프로젝트입니다. 지금 보면 부족한 부분이 많지만, 처음 코드를 배우던 때부터 지금까지 어떻게 성장해 왔는지 기록으로 남겨 두고 싶어 함께 정리했습니다. 너그럽게 봐 주시면 감사하겠습니다.</p>
+        <div class="schools">
+            <div class="school reveal">
+                <div class="school-head"><span class="when">2024</span><b>JavaScript</b></div>
+                <p>DOM 조작, 이벤트 처리, API 호출을 작은 앱으로 반복 연습</p>
+                <div class="chips"><a class="chip" href="https://github.com/leeyongha2006/Calculator" target="_blank" rel="noopener">계산기</a><a class="chip" href="https://github.com/leeyongha2006/Calendar" target="_blank" rel="noopener">캘린더</a><a class="chip" href="https://github.com/leeyongha2006/Stopwatch" target="_blank" rel="noopener">스톱워치</a><a class="chip" href="https://github.com/leeyongha2006/Image-Search-App" target="_blank" rel="noopener">이미지 검색</a><a class="chip" href="https://github.com/leeyongha2006/Color-Picker" target="_blank" rel="noopener">컬러 피커</a><a class="chip" href="https://github.com/leeyongha2006/Drum-Kit" target="_blank" rel="noopener">드럼 키트</a><a class="chip" href="https://github.com/leeyongha2006/Dice-Roll-Simulator" target="_blank" rel="noopener">주사위 시뮬레이터</a><a class="chip" href="https://github.com/leeyongha2006/Random-Password-Generator" target="_blank" rel="noopener">비밀번호 생성기</a><a class="chip" href="https://github.com/leeyongha2006/dark-mode-toggle" target="_blank" rel="noopener">다크 모드 전환</a><a class="chip" href="https://github.com/leeyongha2006/Digital-Clock" target="_blank" rel="noopener">디지털 시계</a><a class="chip" href="https://github.com/leeyongha2006/Clock" target="_blank" rel="noopener">아날로그 시계</a><a class="chip" href="https://github.com/leeyongha2006/Random-Color" target="_blank" rel="noopener">랜덤 컬러</a><a class="chip" href="https://github.com/leeyongha2006/double-landing-page" target="_blank" rel="noopener">이중 랜딩 페이지</a></div>
+            </div>
+            <div class="school reveal">
+                <div class="school-head"><span class="when">2024</span><b>HTML/CSS</b></div>
+                <p>취업맞춤반 방과후 수업에서 웹 화면 구성</p>
+                <div class="chips"><a class="chip" href="https://github.com/leeyongha2006/2024_get_a_job" target="_blank" rel="noopener">취업맞춤반 방과후 과제</a></div>
+            </div>
+            <div class="school reveal">
+                <div class="school-head"><span class="when">2023</span><b>Java</b></div>
+                <p>클래스 설계, JavaFX 화면, DB 연동으로 첫 프로그램 완성</p>
+                <div class="chips"><a class="chip" href="https://github.com/leeyongha2006/Javafx-Kiosk" target="_blank" rel="noopener">키오스크</a><a class="chip" href="https://github.com/leeyongha2006/Vaccine-Reservation-Program" target="_blank" rel="noopener">백신 예약</a><a class="chip" href="https://github.com/leeyongha2006/Local-Ward-Council-Voting-Program" target="_blank" rel="noopener">지역구 의원 투표</a><a class="chip" href="https://github.com/leeyongha2006/diagnostic-test-program" target="_blank" rel="noopener">진단 검사</a><a class="chip" href="https://github.com/leeyongha2006/JavaFx-Member" target="_blank" rel="noopener">회원가입 화면</a><a class="chip" href="https://github.com/leeyongha2006/java-baseballgame" target="_blank" rel="noopener">숫자 야구</a></div>
+            </div>
+            <div class="school reveal">
+                <div class="school-head"><span class="when">2023</span><b>JSP/DB</b></div>
+                <p>JSP와 Oracle로 회원가입 같은 웹 기능, SQL 조인</p>
+                <div class="chips"><a class="chip" href="https://github.com/leeyongha2006/Shoppingamll" target="_blank" rel="noopener">쇼핑몰 회원가입</a><a class="chip" href="https://github.com/leeyongha2006/DBConnection" target="_blank" rel="noopener">DB 연결 회원가입</a><a class="chip" href="https://github.com/leeyongha2006/jsp-first" target="_blank" rel="noopener">JSP 첫걸음</a><a class="chip" href="https://github.com/leeyongha2006/Jsp-second" target="_blank" rel="noopener">JSP 두걸음</a><a class="chip" href="https://github.com/leeyongha2006/DB-SQL-Join" target="_blank" rel="noopener">SQL 조인</a></div>
+            </div>
+            <div class="school reveal">
+                <div class="school-head"><span class="when">2023</span><b>자료구조</b></div>
+                <p>트리와 선형 구조를 Java로 직접 구현</p>
+                <div class="chips"><a class="chip" href="https://github.com/leeyongha2006/Java-Binary-Tree" target="_blank" rel="noopener">이진 트리</a><a class="chip" href="https://github.com/leeyongha2006/Java-Linear-structure" target="_blank" rel="noopener">선형 구조</a></div>
+            </div>
+            <div class="school reveal">
+                <div class="school-head"><span class="when">2023</span><b>HTML</b></div>
+                <p>처음 만든 웹 페이지</p>
+                <div class="chips"><a class="chip" href="https://github.com/leeyongha2006/html-nike-Intruduce" target="_blank" rel="noopener">나이키 소개 사이트</a></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="journey">
     <div class="wrap">
         <div class="kicker reveal">Journey</div>
         <h2 class="reveal">걸어온 길</h2>
@@ -617,7 +650,7 @@ footer { padding: 50px 0 60px; text-align: center; color: var(--muted); font-siz
     </div>
 </section>
 
-<section id="contact">
+<section id="contact" class="alt">
     <div class="wrap">
         <div class="kicker reveal">Contact</div>
         <h2 class="reveal">연락처</h2>
