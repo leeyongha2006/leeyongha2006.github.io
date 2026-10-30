@@ -381,7 +381,7 @@ footer { padding: 50px 0 60px; text-align: center; color: var(--muted); font-siz
                     <span class="chip">Trigger Handler</span><span class="chip">Queueable</span><span class="chip">Apex Managed Sharing</span>
                     <span class="chip">Custom Metadata</span><span class="chip">Named Credential</span><span class="chip">Permission Set</span>
                     <span class="chip">Custom Label · 번역</span><span class="chip">Reports</span><span class="chip">Salesforce CLI</span>
-                </div>
+                <span class="chip">Agentforce</span><span class="chip">Einstein Prompt Template</span><span class="chip">Visualforce PDF</span></div>
             </div>
             <div class="skill reveal">
                 <h3>AI 활용 · 콘텐츠</h3>
@@ -396,7 +396,7 @@ footer { padding: 50px 0 60px; text-align: center; color: var(--muted); font-siz
                 <div class="chips">
                     <span class="chip hot">JavaScript</span><span class="chip hot">Playwright</span><span class="chip">TypeScript</span><span class="chip">React · Remotion</span>
                     <span class="chip">Java</span><span class="chip">Python</span><span class="chip">PowerShell</span><span class="chip">HTML · CSS</span><span class="chip">Jest</span><span class="chip">Git</span><span class="chip">Oracle</span>
-                <span class="chip">React</span><span class="chip">React Native</span><span class="chip">Expo</span><span class="chip">Supabase</span><span class="chip">PostgreSQL</span><span class="chip">Vite</span><span class="chip">Tailwind CSS</span><span class="chip">Express</span><span class="chip">Vercel</span><span class="chip">Toss Payments</span></div>
+                <span class="chip">React</span><span class="chip">React Native</span><span class="chip">Expo</span><span class="chip">Supabase</span><span class="chip">PostgreSQL</span><span class="chip">Vite</span><span class="chip">Tailwind CSS</span><span class="chip">Express</span><span class="chip">Vercel</span><span class="chip">Toss Payments</span><span class="chip">AWS Lambda</span><span class="chip">AWS S3</span><span class="chip">Secrets Manager</span><span class="chip">Chart.js</span><span class="chip">SheetJS</span></div>
             </div>
         </div>
     </div>
@@ -406,7 +406,7 @@ footer { padding: 50px 0 60px; text-align: center; color: var(--muted); font-siz
     <div class="wrap">
         <div class="kicker reveal">Work · Salesforce</div>
         <h2 class="reveal">회사에서 Salesforce로 만든 것들</h2>
-        <p class="sub reveal">고3 때 DKBMC에 Salesforce 개발자로 입사했습니다. 첫 업무로 OData 4.0 작업을 시작했고, 이어서 SRM(구매 관리)의 공급자 등록 요청을 개발한 뒤 SRM 전체를 맡게 되었습니다. 그 과정에서 사내 솔루션(알림 · 게시판 · 위키)의 고도화와 패키징, SRM 모듈 분리, AI 에이전트와 MCP 서버까지 경험하며 역량을 넓혀 가고 있습니다. 카드를 누르면 구현 내용이 펼쳐집니다.</p>
+        <p class="sub reveal">고3 때 DKBMC에 Salesforce 개발자로 입사했습니다. 첫 업무로 OData 4.0 작업을 시작했고, 이어서 SRM 공급자 등록 요청을 개발한 뒤 SRM 전체를 맡게 되었습니다. 그 과정에서 반도체 제조 고객사 구축, 사내 솔루션 고도화와 패키징, AI 에이전트와 MCP 서버까지 경험하며 역량을 넓혀 가고 있습니다. 카드를 누르면 구현 내용이 펼쳐집니다.</p>
         <p class="sub reveal" style="font-size:14px;margin-top:-28px">회사 코드는 공개할 수 없어, 각 저장소에는 정리 문서와 핵심 구조를 직접 다시 구현한 예제 코드를 담았습니다. 고객사와 사내 제품명은 일반 표현으로 바꿨습니다.</p>
 
         <div class="filters reveal" role="group" aria-label="프로젝트 분류">
@@ -418,6 +418,41 @@ footer { padding: 50px 0 60px; text-align: center; color: var(--muted); font-siz
         </div>
 
         <div class="cards">
+            <details class="card big reveal" data-cat="app">
+                <summary>
+                    <div class="card-top"><span class="badge">SRM · 전체 담당</span><span class="when">2025 –</span></div>
+                    <h3>SRM 구매 관리 솔루션</h3>
+                    <p>공급자 등록 요청 개발을 시작으로 SRM 전체를 맡아, 구매요청부터 세금계산서까지의 업무 흐름과 공급사 포털, 리스크, AI 기능까지 개발하고 있습니다.</p>
+                    <div class="nums"><span><b>10단계</b> 구매 업무 흐름</span><span><b>16</b> 패키지</span><span><b>207</b> 회귀 테스트</span></div>
+                    <div class="chips"><span class="chip hot">Apex</span><span class="chip hot">LWC</span><span class="chip">Experience Cloud</span><span class="chip">Platform Event</span><span class="chip">Batch</span></div>
+                </summary>
+                <ul>
+                    <li><b>구매 업무 흐름</b>: 구매요청 → 계획 → 견적 → 계약 → 발주 → 납품 → 입고 → 검수 → 송장 → 세금계산서 전 과정의 화면과 로직</li>
+                    <li><b>공급자 관리</b>: 공급자 등록 요청(단계별 입력), 공급자 평가, 공급사 포털(Experience Cloud)</li>
+                    <li><b>전자계약 연동</b>: 발주 확정 시 계약 자동 생성, 최종 서명 시점에 단가 생성과 겹치는 단가 종료</li>
+                    <li><b>권한과 공유</b>: 검수 담당자 공유 배치, 포털 사용자 요청은 Platform Event 로 넘겨 공유 생성, 역할별 권한 세트</li>
+                    <li><b>그 밖에</b>: 아래의 모듈 패키징, AI 에이전트 · MCP, 리스크 대시보드, 테스트 자동화도 SRM 안에서 맡은 일입니다</li>
+                </ul>
+                <p class="more"><a href="https://github.com/leeyongha2006/srm-procurement-suite" target="_blank" rel="noopener">GitHub 저장소 보기 →</a></p>
+            </details>
+
+            <details class="card big reveal" data-cat="app ai">
+                <summary>
+                    <div class="card-top"><span class="badge">반도체 제조 고객사</span><span class="when">2025.09 – 2026.03</span></div>
+                    <h3>수요 · 장비 가동률 예측과 AI 분석 리포트</h3>
+                    <p>고객 수요 예측 엑셀로 장비별 생산능력과 가동률을 계산하는 예측 화면, 생성형 AI 분석 리포트, 생산계획 대비 실적, AWS Lambda 연동을 개발했습니다.</p>
+                    <div class="nums"><span><b>9,000행</b> 한 번에 처리</span><span><b>AWS</b> Lambda 연동</span></div>
+                    <div class="chips"><span class="chip hot">Apex</span><span class="chip hot">LWC</span><span class="chip">Chart.js</span><span class="chip">Agentforce</span><span class="chip">AWS Lambda</span><span class="chip">Python</span></div>
+                </summary>
+                <ul>
+                    <li><b>수요 · 장비 가동률 예측</b>: 수요 예측 엑셀을 브라우저에서 읽어 장비별 생산능력 · 가동률 계산, 월 · 주 단위 자동 판별, 수요 막대 + 가동률 선 복합 차트</li>
+                    <li><b>AI 예측 분석 리포트</b>: LWC → Apex → Flow → Agentforce 로 호출, Einstein 프롬프트로 예측 버전 비교 리포트 생성, PDF 출력</li>
+                    <li><b>생산계획 대비 실적</b>: 다섯 달 치 계획과 실적으로 달성률 · 1개월 · 3개월 변동률 자동 계산, CSV 업로드</li>
+                    <li><b>AWS 연동</b>: Python Lambda 가 매일 뉴스를 모아 요약해 Salesforce 에 반영(JWT Bearer, Secrets Manager), S3 파일을 외부 링크로 연결</li>
+                </ul>
+                <p class="more"><a href="https://github.com/leeyongha2006/semiconductor-forecast-salesforce" target="_blank" rel="noopener">GitHub 저장소 보기 →</a></p>
+            </details>
+
             <details class="card big reveal" data-cat="pkg">
                 <summary>
                     <div class="card-top"><span class="badge">2GP Packaging</span><span class="when">2026.09 – 10</span></div>
